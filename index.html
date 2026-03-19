@@ -4,12 +4,15 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>SmartLoop – Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet"/>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F0F2F5;display:flex;justify-content:center}
+body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F0F2F5;display:flex;justify-content:center}
 #root{width:100%;max-width:430px;min-height:100vh}
 button{font-family:inherit}
 ::-webkit-scrollbar{width:4px}
@@ -23,12 +26,12 @@ button{font-family:inherit}
 <script type="text/babel">
 const {useState,useEffect,useRef,useCallback}=React;
 
-/* ═══ SMARTLOOP PALETTE ═══ */
+/* ═══ WASTE MATTERS / SMARTLOOP PALETTE ═══ */
 const SL={
-  green:{900:"#0A3D2A",700:"#0D6B3F",500:"#10B068",400:"#2ED47A",300:"#7AE4A8",100:"#D6F5E3",50:"#EDFBF3"},
-  teal:{700:"#00796B",500:"#00A896",300:"#64D8CB",100:"#D0F4F0"},
+  green:{900:"#0D4A2B",700:"#205c40",500:"#43B02A",400:"#5BC83E",300:"#8DD97A",100:"#D6F5E3",50:"#EDFBF3"},
+  teal:{700:"#1a6b5a",500:"#2d8a6e",300:"#6bbfa8",100:"#D0F4E8"},
   orange:{700:"#E65100",500:"#FF6D00",400:"#FF9100",300:"#FFB74D",100:"#FFF3E0"},
-  grey:{900:"#1A1F2B",800:"#2D3345",700:"#3E4560",500:"#6B7280",300:"#B0B8C9",200:"#D1D5DC",100:"#F0F2F5",50:"#F8F9FB"},
+  grey:{900:"#1a1a1a",800:"#2d3345",700:"#3E4560",500:"#6B7280",300:"#B0B8C9",200:"#D1D5DC",100:"#F0F2F5",50:"#F8F9FB"},
   red:{500:"#EF4444",100:"#FEE2E2"},
   yellow:{500:"#F59E0B",100:"#FEF3C7"},
   white:"#FFFFFF",
@@ -53,6 +56,15 @@ const iconPaths={
   "arrow-down":"M12 5v14 M19 12l-7 7-7-7",
   "arrow-up":"M12 19V5 M5 12l7-7 7 7",
   minus:"M5 12h14",
+  recycle:"M7.11 2.89L12 7.78l4.89-4.89 M12 7.78v7.44 M2.89 16.89L7.78 12l-4.89-4.89 M7.78 12H.34 M16.89 21.11L12 16.22l-4.89 4.89 M12 16.22v-7.44",
+  "refresh-cw":"M23 4v6h-6 M1 20v-6h6 M3.51 9a9 9 0 0 1 14.85-3.36L23 10 M1 14l4.64 4.36A9 9 0 0 0 20.49 15",
+  sprout:"M12 22V8 M7 3c0 3 2 5 5 5s5-2 5-5 M5 12c0 4 3 7 7 7s7-3 7-7",
+  flame:"M12 22c-4-2-8-6-8-11a8 8 0 0 1 16 0c0 5-4 9-8 11z M12 22c2-2 4-4 4-7a4 4 0 0 0-8 0c0 3 2 5 4 7z",
+  trophy:"M6 9H2V4h4 M18 9h4V4h-4 M4 22h16 M10 14.66V17c0 2.21-2 3-2 5h8c0-2-2-2.79-2-5v-2.34 M12 2a5 5 0 0 1 5 5v2a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z",
+  star:"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+  target:"M22 12h-4 M6 12H2 M12 6V2 M12 22v-4 M12 12m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0 M12 12m-6 0a6 6 0 1 0 12 0 6 6 0 1 0-12 0 M12 12m-2 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0",
+  award:"M12 15l-3.5 6.5 1-4.5-3.5-2 3.5-2-1-4.5L12 15zm0 0l3.5 6.5-1-4.5 3.5-2-3.5-2 1-4.5L12 15z M12 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14z",
+  shield:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
 };
 
 function Icon({name,size=20,color="#6B7280",strokeWidth=1.5,style={}}){
@@ -74,17 +86,17 @@ const weeklyData=[
   {week:"W11",fill:60,target:72.25},{week:"W12",fill:58,target:72.25},
 ];
 const binTypes=[
-  {id:"general",name:"General Waste",color:SL.grey[700],fillPct:62,icon:"\uD83D\uDDD1",nextCollection:"Tue"},
-  {id:"recycling",name:"Recycling",color:SL.teal[500],fillPct:45,icon:"\u267B\uFE0F",nextCollection:"Tue"},
-  {id:"fogo",name:"FOGO",color:SL.green[500],fillPct:78,icon:"\uD83C\uDF3F",nextCollection:"Fri"},
+  {id:"general",name:"General Waste",color:SL.grey[700],fillPct:62,icon:"trash2",svg:"General%20Waste.svg",nextCollection:"Tue"},
+  {id:"recycling",name:"Recycling",color:SL.teal[500],fillPct:45,icon:"refresh-cw",svg:"Recycling.svg",nextCollection:"Tue"},
+  {id:"fogo",name:"FOGO",color:SL.green[500],fillPct:78,icon:"leaf",svg:"FOGO.svg",nextCollection:"Fri"},
 ];
 const badges=[
-  {name:"First Week",icon:"\uD83C\uDF31",earned:true,desc:"Completed baseline week"},
-  {name:"10% Reducer",icon:"\uD83D\uDCC9",earned:true,desc:"Hit 10% reduction target"},
-  {name:"Streak Master",icon:"\uD83D\uDD25",earned:true,desc:"3 weeks on target"},
-  {name:"FOGO Friend",icon:"\uD83E\uDD6C",earned:true,desc:"Used FOGO bin consistently"},
-  {name:"Neighbourhood Star",icon:"\u2B50",earned:false,desc:"Top 20% in your area"},
-  {name:"15% Champion",icon:"\uD83C\uDFC6",earned:false,desc:"Hit 15% reduction"},
+  {name:"First Week",icon:"sprout",earned:true,desc:"Completed baseline week"},
+  {name:"10% Reducer",icon:"trending-down",earned:true,desc:"Hit 10% reduction target"},
+  {name:"Streak Master",icon:"flame",earned:true,desc:"3 weeks on target"},
+  {name:"FOGO Friend",icon:"leaf",earned:true,desc:"Used FOGO bin consistently"},
+  {name:"Neighbourhood Star",icon:"star",earned:false,desc:"Top 20% in your area"},
+  {name:"15% Champion",icon:"trophy",earned:false,desc:"Hit 15% reduction"},
 ];
 const vouchers=[
   {merchant:"Green Beans Caf\u00E9",offer:"Free coffee with any purchase",value:"$5",expiry:"60 days",redeemed:false},
@@ -101,18 +113,14 @@ const tips=[
 
 /* ═══ SHARED COMPONENTS ═══ */
 
-function SmartLoopLogo({size=28}){
+function MatterLogo({height=16}){
   return(
-    <div style={{display:"flex",alignItems:"center",gap:8}}>
-      <svg viewBox="0 0 40 40" width={size} height={size}>
-        <defs><linearGradient id="slg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor={SL.green[500]}/><stop offset="100%" stopColor={SL.teal[500]}/></linearGradient></defs>
-        <circle cx="20" cy="20" r="18" fill="none" stroke="url(#slg)" strokeWidth="3.5" strokeDasharray="85 28" strokeLinecap="round"/>
-        <circle cx="20" cy="20" r="10" fill="none" stroke={SL.green[400]} strokeWidth="2.5" strokeDasharray="48 16" strokeDashoffset="12" strokeLinecap="round"/>
-        <circle cx="20" cy="20" r="3.5" fill={SL.green[500]}/>
-      </svg>
-      <span style={{fontWeight:800,fontSize:size*0.6,letterSpacing:"-0.02em",background:`linear-gradient(135deg,${SL.green[700]},${SL.teal[700]})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>SmartLoop</span>
-    </div>
+    <img src="Matter_Logo_Colour_RGB-b4c1a104.svg" alt="matter." style={{height,width:"auto",display:"block"}}/>
   );
+}
+
+function SmartLoopLogo(){
+  return null;
 }
 
 function Card({children,style,onClick,hover}){
@@ -144,7 +152,7 @@ function BinGauge({bin,size="normal"}){
         <div style={{position:"absolute",top:0,left:-4,right:-4,height:14,borderRadius:"6px 6px 2px 2px",background:bin.color,boxShadow:"0 2px 6px rgba(0,0,0,0.15)"}}/>
       </div>
       <div style={{textAlign:"center"}}>
-        <div style={{fontSize:size==="small"?18:22}}>{bin.icon}</div>
+        <div style={{width:size==="small"?28:36,height:size==="small"?28:36,borderRadius:"50%",background:bin.color+"18",display:"flex",alignItems:"center",justifyContent:"center"}}><Icon name={bin.icon} size={size==="small"?14:18} color={bin.color} strokeWidth={2}/></div>
         <div style={{fontSize:size==="small"?10:12,fontWeight:700,color:SL.grey[700],marginTop:2}}>{bin.fillPct}%</div>
         {size!=="small"&&<div style={{fontSize:10,color:SL.grey[500],marginTop:1}}>{bin.name}</div>}
       </div>
@@ -215,77 +223,18 @@ function MiniChart({data,width=340,height=180}){
 
 /* ═══ BINNY THE BIN CHOOK ═══ */
 
-function BinnyIcon({eyeColor=SL.green[500],size=130,isDead=false}){
+function BinnyIcon({eyeColor,size=130,isDead=false}){
   return(
-    <svg viewBox="0 0 200 240" width={size} height={size*1.2} xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bBd" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0%" stopColor="#F5F0EB"/><stop offset="60%" stopColor="#E8E0D6"/><stop offset="100%" stopColor="#D4C9BC"/></linearGradient>
-        <linearGradient id="bWg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#2A2A2A"/><stop offset="100%" stopColor="#1A1A1A"/></linearGradient>
-        <radialGradient id="eGL" cx="50%" cy="50%" r="70%"><stop offset="0%" stopColor={eyeColor} stopOpacity="0.9"/><stop offset="100%" stopColor={eyeColor} stopOpacity="0"/></radialGradient>
-      </defs>
-      {/* Legs */}
-      <g stroke={SL.grey[700]} strokeWidth="3" strokeLinecap="round" fill="none">
-        <line x1="88" y1="185" x2="80" y2="220"/><line x1="112" y1="185" x2="120" y2="220"/>
-        <path d="M72 220 L80 220 L84 226 M80 220 L80 227 M80 220 L76 226" strokeWidth="2"/>
-        <path d="M112 220 L120 220 L124 226 M120 220 L120 227 M120 220 L116 226" strokeWidth="2"/>
-      </g>
-      {/* Body group — flips when dead */}
-      <g style={{transformOrigin:"100px 130px",transform:isDead?"rotate(180deg) translateY(30px)":"rotate(0deg)",transition:"transform 0.8s cubic-bezier(0.4,0,0.2,1)"}}>
-        {/* Tail */}
-        <ellipse cx="52" cy="152" rx="20" ry="9" fill="url(#bWg)" transform="rotate(-20,52,152)"/>
-        <ellipse cx="47" cy="147" rx="16" ry="7" fill="#222" transform="rotate(-30,47,147)"/>
-        <ellipse cx="45" cy="155" rx="15" ry="6" fill="#333" transform="rotate(-12,45,155)"/>
-        {/* Body */}
-        <ellipse cx="100" cy="148" rx="48" ry="42" fill="url(#bBd)"/>
-        {/* Wing */}
-        <ellipse cx="72" cy="142" rx="30" ry="20" fill="url(#bWg)" transform="rotate(-8,72,142)"/>
-        <path d="M50 134 Q62 138 54 148" stroke="#444" strokeWidth="1" fill="none"/>
-        <path d="M56 131 Q68 135 61 145" stroke="#444" strokeWidth="1" fill="none"/>
-        <path d="M62 129 Q74 133 67 143" stroke="#444" strokeWidth="1" fill="none"/>
-        {/* Neck */}
-        <path d="M108 120 Q114 90 112 65 Q111 48 114 38 Q120 36 125 40 Q130 55 128 78 Q126 100 122 125" fill="url(#bBd)"/>
-        {/* Head */}
-        <ellipse cx="118" cy="36" rx="18" ry="15" fill="url(#bBd)"/>
-        <ellipse cx="121" cy="32" rx="11" ry="9" fill="#1A1A1A" opacity="0.12"/>
-        {/* Eyes */}
-        {isDead?(
-          <g stroke={SL.red[500]} strokeWidth="2.5" strokeLinecap="round">
-            <line x1="108" y1="30" x2="115" y2="37"/><line x1="115" y1="30" x2="108" y2="37"/>
-            <line x1="122" y1="30" x2="129" y2="37"/><line x1="129" y1="30" x2="122" y2="37"/>
-          </g>
-        ):(
-          <g>
-            <circle cx="112" cy="34" r="9" fill="url(#eGL)"/><circle cx="125" cy="34" r="9" fill="url(#eGL)"/>
-            <circle cx="112" cy="34" r="5.5" fill={eyeColor} style={{transition:"fill 0.4s"}}/>
-            <circle cx="112" cy="34" r="2.8" fill="#111"/><circle cx="110.5" cy="32.5" r="1.2" fill="white" opacity="0.85"/>
-            <circle cx="125" cy="34" r="5.5" fill={eyeColor} style={{transition:"fill 0.4s"}}/>
-            <circle cx="125" cy="34" r="2.8" fill="#111"/><circle cx="123.5" cy="32.5" r="1.2" fill="white" opacity="0.85"/>
-          </g>
-        )}
-        {/* Beak */}
-        <path d="M132 37 Q152 42 168 58 Q172 63 170 65 Q164 62 148 53 Q136 47 130 42 Z" fill="#1A1A1A"/>
-        <path d="M137 41 Q152 47 164 58" stroke="#333" strokeWidth="0.6" fill="none"/>
-        {/* Feather texture */}
-        <g stroke="#C8BDB0" strokeWidth="0.8" fill="none">
-          <path d="M82 136 Q92 134 97 138"/><path d="M87 144 Q97 142 102 146"/>
-          <path d="M92 152 Q102 150 107 154"/><path d="M112 130 Q120 128 124 132"/>
-          <path d="M114 138 Q122 136 126 140"/>
-        </g>
-      </g>
-    </svg>
+    <div style={{width:size,height:size*1.2,display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+      <img src="binny.svg" alt="Binny" style={{width:size,height:"auto",filter:isDead?"grayscale(1) opacity(0.5)":"none",transform:isDead?"rotate(180deg)":"none",transition:"all 0.8s cubic-bezier(0.4,0,0.2,1)"}}/>
+      {isDead&&<div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",fontSize:28}}>{"✕"}</div>}
+    </div>
   );
 }
 
-function BinnyMini({color=SL.green[500]}){
+function BinnyMini(){
   return(
-    <svg viewBox="85 22 60 38" width="22" height="16">
-      <ellipse cx="113" cy="44" rx="14" ry="11" fill="#E8E0D6"/>
-      <ellipse cx="104" cy="42" rx="9" ry="6" fill="#222" transform="rotate(-8,104,42)"/>
-      <circle cx="110" cy="34" r="3.5" fill={color}/><circle cx="118" cy="34" r="3.5" fill={color}/>
-      <circle cx="110" cy="34" r="1.8" fill="#111"/><circle cx="118" cy="34" r="1.8" fill="#111"/>
-      <circle cx="109" cy="33" r="0.8" fill="white" opacity="0.8"/><circle cx="117" cy="33" r="0.8" fill="white" opacity="0.8"/>
-      <path d="M123 36 Q135 40 143 50" stroke="#1A1A1A" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-    </svg>
+    <img src="binny.svg" alt="Binny" style={{width:22,height:16,objectFit:"contain"}}/>
   );
 }
 
@@ -343,7 +292,7 @@ function FridgeMagnet({bins,onClose}){
               <span style={{fontSize:11,color:SL.grey[500]}}>Next collection</span>
               <div style={{fontSize:16,fontWeight:800,color:SL.green[400],marginTop:2}}>TUESDAY</div>
             </div>
-            <div style={{textAlign:"center",marginTop:10}}><span style={{fontSize:16,fontWeight:900,color:SL.white,letterSpacing:"-0.02em"}}>SmartLoop</span></div>
+            <div style={{textAlign:"center",marginTop:10}}><span style={{fontSize:16,fontWeight:900,color:SL.white,letterSpacing:"-0.02em",fontFamily:"'Poppins',sans-serif"}}>SmartLoop</span></div>
           </div>
           <div style={{display:"flex",gap:10,marginTop:16}}>
             <button onClick={()=>setTruckOn(!truckOn)} style={{flex:1,padding:"10px 12px",borderRadius:10,border:"none",cursor:"pointer",fontSize:11,fontWeight:700,background:truckOn?SL.orange[500]:SL.grey[100],color:truckOn?SL.white:SL.grey[700],transition:"all 0.3s"}}>{truckOn?"Truck Nearby!":"Simulate Truck"}</button>
@@ -386,11 +335,11 @@ function HomePage({cashBalance,weekNumber,phase}){
 
   return(
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{background:`linear-gradient(135deg,${SL.green[700]},${SL.teal[700]})`,borderRadius:20,padding:24,color:SL.white}}>
+      <div style={{background:`linear-gradient(135deg,${SL.green[900]},${SL.green[700]})`,borderRadius:20,padding:24,color:SL.white}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
           <div>
-            <div style={{fontSize:14,opacity:0.8,marginBottom:4}}>Good morning, Len</div>
-            <div style={{fontSize:22,fontWeight:800,lineHeight:1.2}}>Great Job!</div>
+            <div style={{fontSize:14,opacity:0.8,marginBottom:4,fontFamily:"'Manrope',sans-serif"}}>Good morning, Len</div>
+            <div style={{fontSize:22,fontWeight:800,lineHeight:1.2,fontFamily:"'Poppins',sans-serif"}}>Great Job!</div>
             <div style={{fontSize:13,opacity:0.85,marginTop:6,lineHeight:1.4}}>Track and manage your waste<br/>to help create a cleaner world.</div>
           </div>
           <CircularProgress value={reductionPct} max={25} size={90} strokeWidth={8} color={SL.green[300]}>
@@ -435,9 +384,15 @@ function HomePage({cashBalance,weekNumber,phase}){
       </Card>
       <Card>
         <div style={{fontSize:14,fontWeight:700,color:SL.grey[900],marginBottom:16}}>Your Bins</div>
-        <div style={{display:"flex",justifyContent:"space-around"}}>{binTypes.map(b=><BinGauge key={b.id} bin={b}/>)}</div>
-        <div style={{display:"flex",justifyContent:"center",gap:20,marginTop:16,paddingTop:12,borderTop:`1px solid ${SL.grey[100]}`}}>
-          {binTypes.map(b=>(<div key={b.id} style={{textAlign:"center"}}><div style={{fontSize:10,color:SL.grey[500]}}>Next pickup</div><div style={{fontSize:12,fontWeight:700,color:SL.grey[700]}}>{b.nextCollection}</div></div>))}
+        <div style={{display:"flex",justifyContent:"space-around",alignItems:"flex-end"}}>
+          {binTypes.map(b=>(
+            <div key={b.id} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6,flex:1}}>
+              <img src={b.svg} alt={b.name} style={{width:80,height:"auto"}}/>
+              <div style={{fontSize:12,fontWeight:700,color:SL.grey[700]}}>{b.fillPct}%</div>
+              <div style={{fontSize:10,color:SL.grey[500]}}>{b.name}</div>
+              <div style={{fontSize:10,color:SL.grey[400]}}>Next: {b.nextCollection}</div>
+            </div>
+          ))}
         </div>
       </Card>
       <Card style={{background:SL.yellow[100],border:`1px solid ${SL.yellow[500]}40`}}>
@@ -453,7 +408,7 @@ function HomePage({cashBalance,weekNumber,phase}){
 function BinsPage(){
   return(
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900]}}>Bin Monitor</div>
+      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900],fontFamily:"'Poppins',sans-serif"}}>Bin Monitor</div>
       {binTypes.map(bin=>(
         <Card key={bin.id} hover>
           <div style={{display:"flex",alignItems:"center",gap:16}}>
@@ -484,10 +439,10 @@ function RewardsPage({cashBalance}){
   const[tab,setTab]=useState("vouchers");
   return(
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900]}}>Rewards</div>
-      <div style={{background:`linear-gradient(135deg,${SL.green[700]},${SL.green[900]})`,borderRadius:20,padding:24,color:SL.white}}>
+      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900],fontFamily:"'Poppins',sans-serif"}}>Rewards</div>
+      <div style={{background:`linear-gradient(135deg,${SL.green[900]},${SL.green[700]})`,borderRadius:20,padding:24,color:SL.white}}>
         <div style={{fontSize:12,opacity:0.8}}>Your SmartLoop Account</div>
-        <div style={{fontSize:36,fontWeight:800,marginTop:4}}>${cashBalance}<span style={{fontSize:16,opacity:0.6}}>.00</span></div>
+        <div style={{fontSize:36,fontWeight:800,marginTop:4,fontFamily:"'Poppins',sans-serif"}}>${cashBalance}<span style={{fontSize:16,opacity:0.6}}>.00</span></div>
         <div style={{display:"flex",justifyContent:"space-between",marginTop:16,paddingTop:12,borderTop:"1px solid rgba(255,255,255,0.15)"}}>
           <div><div style={{fontSize:10,opacity:0.6}}>Started</div><div style={{fontSize:14,fontWeight:700}}>$120.00</div></div>
           <div><div style={{fontSize:10,opacity:0.6}}>Deducted</div><div style={{fontSize:14,fontWeight:700,color:SL.orange[300]}}>-$8.40</div></div>
@@ -521,7 +476,7 @@ function RewardsPage({cashBalance}){
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:12}}>
           {badges.map((b,i)=>(
             <Card key={i} style={{padding:14,textAlign:"center",opacity:b.earned?1:0.4,background:b.earned?SL.green[50]:SL.grey[50]}}>
-              <div style={{fontSize:28}}>{b.icon}</div>
+              <div style={{width:44,height:44,borderRadius:"50%",background:b.earned?SL.green[100]:SL.grey[100],display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto"}}><Icon name={b.icon} size={22} color={b.earned?SL.green[500]:SL.grey[400]} strokeWidth={2}/></div>
               <div style={{fontSize:11,fontWeight:700,color:SL.grey[800],marginTop:6}}>{b.name}</div>
               <div style={{fontSize:9,color:SL.grey[500],marginTop:2}}>{b.desc}</div>
               {b.earned&&<div style={{marginTop:6}}><Icon name="check-circle" size={14} color={SL.green[500]}/></div>}
@@ -536,7 +491,7 @@ function RewardsPage({cashBalance}){
 function InsightsPage(){
   return(
     <div style={{display:"flex",flexDirection:"column",gap:16}}>
-      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900]}}>Insights</div>
+      <div style={{fontSize:20,fontWeight:800,color:SL.grey[900],fontFamily:"'Poppins',sans-serif"}}>Insights</div>
       <Card>
         <div style={{fontSize:14,fontWeight:700,color:SL.grey[900],marginBottom:4}}>Weekly Fill Rate</div>
         <div style={{fontSize:11,color:SL.grey[500],marginBottom:16}}>Your performance vs. target over time</div>
@@ -586,11 +541,12 @@ function SmartLoopHome(){
   const[showMagnet,setShowMagnet]=useState(false);
   const cashBalance=114.80;
   return(
-    <div style={{maxWidth:430,margin:"0 auto",minHeight:"100vh",background:SL.grey[50],fontFamily:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",display:"flex",flexDirection:"column"}}>
-      <div style={{padding:"16px 20px 12px",background:SL.white,position:"sticky",top:0,zIndex:100,borderBottom:`1px solid ${SL.grey[100]}`}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <SmartLoopLogo size={26}/>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
+    <div style={{maxWidth:430,margin:"0 auto",minHeight:"100vh",background:SL.grey[50],fontFamily:"'Manrope',-apple-system,BlinkMacSystemFont,sans-serif",display:"flex",flexDirection:"column"}}>
+      <div style={{padding:"12px 20px 10px",background:SL.white,position:"sticky",top:0,zIndex:100,borderBottom:`1px solid ${SL.grey[100]}`}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr auto 1fr",alignItems:"center"}}>
+          <div style={{justifySelf:"start"}}><MatterLogo height={18}/></div>
+          <span style={{fontWeight:800,fontSize:14,fontFamily:"'Poppins',sans-serif",letterSpacing:"-0.02em",color:SL.green[700]}}>SmartLoop</span>
+          <div style={{justifySelf:"end",display:"flex",alignItems:"center",gap:10}}>
             <div style={{position:"relative"}}><Icon name="bell" size={20} color={SL.grey[500]}/><div style={{position:"absolute",top:-2,right:-2,width:8,height:8,borderRadius:"50%",background:SL.orange[500],border:`2px solid ${SL.white}`}}/></div>
             <div style={{width:32,height:32,borderRadius:"50%",background:`linear-gradient(135deg,${SL.green[500]},${SL.teal[500]})`,display:"flex",alignItems:"center",justifyContent:"center",color:SL.white,fontSize:13,fontWeight:700}}>L</div>
           </div>
@@ -603,7 +559,7 @@ function SmartLoopHome(){
         {page==="insights"&&<InsightsPage/>}
       </div>
       <div style={{padding:"4px 16px 6px",textAlign:"center",borderTop:`1px solid ${SL.grey[100]}`,background:SL.white}}>
-        <span style={{fontSize:9,color:SL.grey[300]}}>Powered by <strong style={{color:SL.grey[500]}}>SmartLoop</strong> \u00B7 Smart Waste Intelligence</span>
+        <span style={{fontSize:9,color:SL.grey[300]}}>Powered by <strong style={{color:SL.green[500]}}>Matter</strong> \u00B7 SmartLoop Waste Intelligence</span>
       </div>
       <NavBar active={page} setActive={setPage} onMagnet={()=>setShowMagnet(true)}/>
       {showMagnet&&<FridgeMagnet bins={binTypes} onClose={()=>setShowMagnet(false)}/>}
