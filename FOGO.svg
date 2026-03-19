@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 608 951">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Poppins-Light, Poppins;
+        font-size: 56px;
+        font-weight: 300;
+      }
+
+      .cls-2 {
+        fill: #27a063;
+      }
+
+      .cls-3 {
+        fill: #181b26;
+      }
+
+      .cls-4 {
+        fill: #f7931e;
+        opacity: .75;
+      }
+
+      .cls-5 {
+        fill: #c6c6c6;
+      }
+
+      .cls-6 {
+        fill: #42cc86;
+      }
+
+      .cls-7 {
+        fill: #fff;
+        stroke: #4f4f4f;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-8 {
+        fill: #30b374;
+      }
+    </style>
+  </defs>
+  <g id="objects">
+    <g>
+      <g>
+        <rect class="cls-3" x="18.3" y="748.07" width="66.85" height="177.47" rx="25.15" ry="25.15"/>
+        <rect class="cls-3" x="522.85" y="748.07" width="66.85" height="177.47" rx="25.15" ry="25.15" transform="translate(1112.55 1673.6) rotate(-180)"/>
+        <polygon class="cls-2" points="10.35 132.9 67.64 209.3 67.64 122.56 10.35 132.9"/>
+        <polygon class="cls-2" points="597.66 132.9 540.36 209.3 540.36 122.56 597.66 132.9"/>
+        <path class="cls-2" d="M442.47,41.38l-27.04-32.7C410.88,3.18,404.12,0,396.99,0h-185.98c-7.13,0-13.89,3.18-18.44,8.68l-27.04,32.7h276.94Z"/>
+        <path class="cls-5" d="M552.3,128.92l-24.83,801.83c-.35,11.28-9.6,20.25-20.89,20.25h-202.57s-202.57,0-202.57,0c-11.29,0-20.54-8.96-20.89-20.25L55.71,128.92h496.59Z"/>
+        <path class="cls-4" d="M533,329.49l-20.88,586.65c-.33,10.51-8.94,18.85-19.46,18.85H115.34c-10.51,0-19.13-8.34-19.46-18.85l-17.88-586.65h455Z"/>
+        <path class="cls-2" d="M147.52,132.11l8.63,62.57c.23,1.65,2.62,1.65,2.84,0l8.63-62.57h-20.1Z"/>
+        <path class="cls-2" d="M293.66,132.11l8.63,62.57c.23,1.65,2.62,1.65,2.84,0l8.63-62.57h-20.1Z"/>
+        <path class="cls-2" d="M439.79,132.11l8.63,62.57c.23,1.65,2.62,1.65,2.84,0l8.63-62.57h-20.1Z"/>
+        <path class="cls-8" d="M600.05,97.89s-8.64-42.48-47.15-60.32c-3.63-1.68-7.58-2.55-11.58-2.55H66.69c-4,0-7.96.86-11.58,2.55C16.6,55.41,7.96,97.89,7.96,97.89h592.09Z"/>
+        <rect class="cls-6" y="90.72" width="608" height="43.77" rx="4.77" ry="4.77"/>
+      </g>
+      <g>
+        <text class="cls-1" transform="translate(156 302.93)"><tspan x="0" y="0">Full</tspan><tspan x="0" y="248">Med</tspan><tspan x="0" y="496">Low</tspan></text>
+        <ellipse class="cls-7" cx="128" cy="284.23" rx="14" ry="14.27"/>
+        <ellipse class="cls-7" cx="128" cy="531.49" rx="14" ry="14.27"/>
+        <ellipse class="cls-7" cx="128" cy="780.77" rx="14" ry="14.27"/>
+      </g>
+    </g>
+  </g>
+</svg>
