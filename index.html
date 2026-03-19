@@ -115,7 +115,7 @@ const tips=[
 
 function MatterLogo({height=16}){
   return(
-    <img src="Matter_Logo_Colour_RGB.svg" alt="matter." style={{height,width:"auto",display:"block"}}/>
+    <img src="Matter_Logo_Colour_RGB-b4c1a104.svg" alt="matter." style={{height,width:"auto",display:"block"}}/>
   );
 }
 
@@ -412,7 +412,7 @@ function BinsPage(){
       {binTypes.map(bin=>(
         <Card key={bin.id} hover>
           <div style={{display:"flex",alignItems:"center",gap:16}}>
-            <BinGauge bin={bin} size="small"/>
+            <img src={bin.svg} alt={bin.name} style={{width:70,height:"auto",flexShrink:0}}/>
             <div style={{flex:1}}>
               <div style={{fontSize:15,fontWeight:700,color:SL.grey[900]}}>{bin.name}</div>
               <div style={{fontSize:12,color:SL.grey[500],marginTop:4}}>Fill level: {bin.fillPct}%</div>
